@@ -1,7 +1,7 @@
 package com.local.rank.service;
 
-import com.omsa.rank.request.MoneyDeductionRequest;
-import com.omsa.rank.request.PlayerRequest;
+import com.local.rank.request.MoneyDeductionRequest;
+import com.local.rank.request.PlayerRequest;
 
 public interface RankManagerIF {
 

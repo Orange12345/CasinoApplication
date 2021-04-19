@@ -1,4 +1,4 @@
-package com.omsa.rank.request;
+package com.local.rank.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -13,8 +13,8 @@ import com.local.rank.daos.repositories.TransactionTableRepository;
 import com.local.rank.db.model.PlayerDetail;
 import com.local.rank.db.model.TransactionPlayer;
 import com.local.rank.db.model.TransactionTable;
-import com.omsa.rank.request.MoneyDeductionRequest;
-import com.omsa.rank.request.PlayerRequest;
+import com.local.rank.request.MoneyDeductionRequest;
+import com.local.rank.request.PlayerRequest;
 
 @Service
 public class RankManagerIFImpl implements RankManagerIF{

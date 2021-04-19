@@ -1,10 +1,10 @@
-package com.omsa.rank.response;
+package com.local.rank.response;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.omsa.rank.request.MoneyDeductionRequest;
+import com.local.rank.request.MoneyDeductionRequest;
 
 public class ResponseObjectListForDeductionAndMoney implements Serializable {
 	/**

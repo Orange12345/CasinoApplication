@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.local.rank.constant.RankConstants;
+import com.local.rank.request.MoneyDeductionRequest;
+import com.local.rank.request.PlayerRequest;
+import com.local.rank.response.ResponseObjectListForDeductionAndMoney;
+import com.local.rank.response.ResponseObjectListPlayer;
 import com.local.rank.service.RankManagerIFImpl;
-import com.omsa.rank.request.MoneyDeductionRequest;
-import com.omsa.rank.request.PlayerRequest;
-import com.omsa.rank.response.ResponseObjectListForDeductionAndMoney;
-import com.omsa.rank.response.ResponseObjectListPlayer;
 
 @RestController
 public class CasinoRankController {
