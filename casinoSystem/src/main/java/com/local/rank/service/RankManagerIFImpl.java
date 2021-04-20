@@ -30,17 +30,15 @@ public class RankManagerIFImpl implements RankManagerIF{
 		PlayerDetail plDetails=new PlayerDetail();
 		if(playerDetails!=null)
 		{
-			/*plDetails.setPlayerid(!StringUtils.isEmpty(playerDetails.getPlayerID())
-					? (long)playerDetails.getPlayerID() : null);*/
-
 			plDetails.setPlayername(!StringUtils.isEmpty(playerDetails.getPlayerName())
 					? playerDetails.getPlayerName() : null);
 			plDetails.setDepositingamount(!StringUtils.isEmpty(playerDetails.getDepositingAmount())
 					? (long)(playerDetails.getDepositingAmount()) : null);
 			plDetails.setCurrentbalance(!StringUtils.isEmpty(playerDetails.getCurrentBalance())
 					? (long)playerDetails.getCurrentBalance() : null);
+			plDetails=playerDetailsRepository.save(plDetails);
+			playerDetails.setPlayerID((int)plDetails.getPlayerid());
 		}
-		playerDetailsRepository.save(plDetails);
 		return playerDetails;
 	}
 	public MoneyDeductionRequest moneyDeductionDetails(MoneyDeductionRequest moneyDeductionRequest) {
@@ -52,6 +50,8 @@ public class RankManagerIFImpl implements RankManagerIF{
 		transactionTable=(moneyDeductionRequest.getTransactionID()==0)?saveTransactionDetails(moneyDeductionRequest):transactionTableRepository.findBytransactionid(
 				(long)moneyDeductionRequest.getTransactionID());
 
+		if(moneyDeductionRequest.getTransactionID()>0 && moneyDeductionRequest.getTransactionID()==0)
+		{
 		transactionPlayer.setPlayerDetail(playerDetail);
 		transactionPlayer.setTransactionTable(transactionTable);
 
@@ -62,7 +62,13 @@ public class RankManagerIFImpl implements RankManagerIF{
 		transactionPlayer.setWinningamount(!StringUtils.isEmpty(moneyDeductionRequest.getWinningAmount())?(long)moneyDeductionRequest.getWinningAmount():null);
 		transactionPlayer.setWinningflag(!StringUtils.isEmpty(moneyDeductionRequest.getWiningFlag())?moneyDeductionRequest.getWiningFlag():RankConstants.VALUE_N);
 		transactionPlayerRepository.save(transactionPlayer);
-		moneyDeductionRequest.setTransactionID(StringUtils.isEmpty(transactionTable)? (int)transactionTable.getTransactionid() : null);
+		}
+		else if(!StringUtils.isEmpty(moneyDeductionRequest.getPromoCode()))
+		{
+			transactionPlayerRepository.updateBettingAmntForTransactionPlayer(moneyDeductionRequest.getPlayerID(), moneyDeductionRequest.getTransactionID(),0);
+			moneyDeductionRequest.setBettingAmount(0);
+		}
+		moneyDeductionRequest.setTransactionID(!StringUtils.isEmpty(transactionTable)? (int)transactionTable.getTransactionid() : null);
 		return moneyDeductionRequest;
 	}
 	private TransactionTable saveTransactionDetails(MoneyDeductionRequest moneyDeductionRequest) {

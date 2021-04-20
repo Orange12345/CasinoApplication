@@ -19,4 +19,9 @@ public interface TransactionPlayerRepository extends CrudRepository<TransactionP
 	@Modifying
 	@Query(value="update TRANSACTION_PLAYER set winningamount=?3, winningflag=?4 where PLAYERID=?1 and TRANSACTIONID=?2",nativeQuery=true)
 	public void updateTransactionPlayer(int playerId, int transactionId,double winningamount,String winningflag);
+	
+	@Transactional
+	@Modifying
+	@Query(value="update TRANSACTION_PLAYER set betingamount=?3 where PLAYERID=?1 and TRANSACTIONID=?2",nativeQuery=true)
+	public void updateBettingAmntForTransactionPlayer(int playerId, int transactionId,double bettingAmount);
 }
